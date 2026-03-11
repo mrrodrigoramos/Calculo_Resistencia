@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Calculo Resistivo</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:40px;
+}
+
+input{
+margin:5px;
+padding:6px;
+}
+
+.resultado{
+margin-top:20px;
+padding:15px;
+border:1px solid #ccc;
+width:300px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Calculo Resistivo</h2>
+
+<form method="POST">
+
+<label>Tensão (V)</label><br>
+<input name="tensao" required><br>
+
+<label>Altura (mm)</label><br>
+<input name="altura" required><br>
+
+<label>Largura (mm)</label><br>
+<input name="largura" required><br>
+
+<label>Potência desejada (W)</label><br>
+<input name="potencia" required><br>
+
+<label>Rs (Ω/sq)</label><br>
+<input name="rs" required><br>
+
+<hr>
+
+<h3>Parâmetros Busbar</h3>
+
+<label>AT Distância (mm)</label><br>
+<input name="AT" value="5"><br>
+
+<label>AB Distância (mm)</label><br>
+<input name="AB" value="5"><br>
+
+<label>BL Distância (mm)</label><br>
+<input name="BL" value="5"><br>
+
+<label>BR Distância (mm)</label><br>
+<input name="BR" value="5"><br>
+
+<label>Largura Busbar (mm)</label><br>
+<input name="LB" value="5"><br><br>
+
+<button type="submit">Calcular</button>
+
+</form>
+
+{% if resultado %}
+
+<div class="resultado">
+
+<h3>Resultado</h3>
+
+<p>Espaços: {{resultado.espacos}}</p>
+<p>Cortes: {{resultado.cortes}}</p>
+<p>Passo: {{resultado.passo}} mm</p>
+<p>Resistência: {{resultado.resistencia}} Ω</p>
+<p>Potência: {{resultado.potencia}} W</p>
+
+</div>
+
+{% endif %}
+
+</body>
+</html>
