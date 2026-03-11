@@ -8,20 +8,113 @@
 <style>
 
 body{
-font-family: Arial;
-margin:40px;
+font-family: "Segoe UI", Arial;
+background:#f4f6f9;
+margin:0;
+padding:0;
+}
+
+.container{
+width:900px;
+margin:auto;
+margin-top:40px;
+background:white;
+padding:30px;
+border-radius:8px;
+box-shadow:0px 5px 15px rgba(0,0,0,0.08);
+}
+
+h1{
+margin-top:0;
+color:#2c3e50;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.field{
+display:flex;
+flex-direction:column;
+}
+
+label{
+font-size:13px;
+color:#555;
+margin-bottom:4px;
 }
 
 input{
-margin:5px;
-padding:6px;
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+transition:0.2s;
+}
+
+input:focus{
+border-color:#4a90e2;
+outline:none;
+}
+
+button{
+margin-top:20px;
+padding:12px;
+background:#4a90e2;
+color:white;
+border:none;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+background:#3a78c0;
+}
+
+.section{
+margin-top:30px;
 }
 
 .resultado{
 margin-top:20px;
-padding:15px;
-border:1px solid #ccc;
-width:300px;
+padding:20px;
+border-radius:8px;
+background:#f7f9fc;
+border:1px solid #e3e6ea;
+}
+
+.resultado h2{
+margin-top:0;
+color:#2c3e50;
+}
+
+.result-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.result-item{
+background:white;
+padding:10px;
+border-radius:5px;
+border:1px solid #ddd;
+}
+
+.result-title{
+font-size:12px;
+color:#777;
+}
+
+.result-value{
+font-size:18px;
+font-weight:bold;
+color:#2c3e50;
 }
 
 </style>
@@ -30,43 +123,75 @@ width:300px;
 
 <body>
 
-<h2>Calculo Resistivo</h2>
+<div class="container">
+
+<h1>Cálculo Resistivo</h1>
 
 <form method="POST">
 
-<label>Tensão (V)</label><br>
-<input name="tensao" required><br>
+<div class="grid">
 
-<label>Altura (mm)</label><br>
-<input name="altura" required><br>
+<div class="field">
+<label>Tensão (V)</label>
+<input name="tensao" required>
+</div>
 
-<label>Largura (mm)</label><br>
-<input name="largura" required><br>
+<div class="field">
+<label>Potência desejada (W)</label>
+<input name="potencia" required>
+</div>
 
-<label>Potência desejada (W)</label><br>
-<input name="potencia" required><br>
+<div class="field">
+<label>Altura (mm)</label>
+<input name="altura" required>
+</div>
 
-<label>Rs (Ω/sq)</label><br>
-<input name="rs" required><br>
+<div class="field">
+<label>Largura (mm)</label>
+<input name="largura" required>
+</div>
 
-<hr>
+<div class="field">
+<label>Rs (Ω/sq)</label>
+<input name="rs" required>
+</div>
+
+</div>
+
+<div class="section">
 
 <h3>Parâmetros Busbar</h3>
 
-<label>AT Distância (mm)</label><br>
-<input name="AT" value="5"><br>
+<div class="grid">
 
-<label>AB Distância (mm)</label><br>
-<input name="AB" value="5"><br>
+<div class="field">
+<label>AT Distância (mm)</label>
+<input name="AT" value="5">
+</div>
 
-<label>BL Distância (mm)</label><br>
-<input name="BL" value="5"><br>
+<div class="field">
+<label>AB Distância (mm)</label>
+<input name="AB" value="5">
+</div>
 
-<label>BR Distância (mm)</label><br>
-<input name="BR" value="5"><br>
+<div class="field">
+<label>BL Distância (mm)</label>
+<input name="BL" value="5">
+</div>
 
-<label>Largura Busbar (mm)</label><br>
-<input name="LB" value="5"><br><br>
+<div class="field">
+<label>BR Distância (mm)</label>
+<input name="BR" value="5">
+</div>
+
+<div class="field">
+<label>Largura Busbar (mm)</label>
+<input name="LB" value="5">
+</div>
+
+</div>
+
+</div>
 
 <button type="submit">Calcular</button>
 
@@ -76,17 +201,44 @@ width:300px;
 
 <div class="resultado">
 
-<h3>Resultado</h3>
+<h2>Resultado</h2>
 
-<p>Espaços: {{resultado.espacos}}</p>
-<p>Cortes: {{resultado.cortes}}</p>
-<p>Passo: {{resultado.passo}} mm</p>
-<p>Resistência: {{resultado.resistencia}} Ω</p>
-<p>Potência: {{resultado.potencia}} W</p>
+<div class="result-grid">
+
+<div class="result-item">
+<div class="result-title">Espaços</div>
+<div class="result-value">{{resultado.espacos}}</div>
+</div>
+
+<div class="result-item">
+<div class="result-title">Resistência</div>
+<div class="result-value">{{resultado.resistencia}} Ω</div>
+</div>
+
+<div class="result-item">
+<div class="result-title">Cortes</div>
+<div class="result-value">{{resultado.cortes}}</div>
+</div>
+
+<div class="result-item">
+<div class="result-title">Potência</div>
+<div class="result-value">{{resultado.potencia}} W</div>
+</div>
+
+<div class="result-item">
+<div class="result-title">Passo</div>
+<div class="result-value">{{resultado.passo}} mm</div>
+</div>
+
+
+
+</div>
 
 </div>
 
 {% endif %}
+
+</div>
 
 </body>
 </html>
